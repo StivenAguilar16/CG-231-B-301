@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ortografica</title>
+        <style>
+            body { margin: 0; }
+        </style>
+    </head>
+
+    <body>
+      <h1> </h1>
+        <script src="https://threejs.org/build/three.js"></script>
+        <script type="text/javascript" src="dat.gui.js"></script>
+        <script>
+       
+            //Se llama la camara y la escena
+              const scene = new THREE.Scene();
+              const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight);
+           
+            //Se llama el renderizador
+              const renderer = new THREE.WebGLRenderer();
+              renderer.setSize( window.innerWidth, window.innerHeight );
+              document.body.appendChild( renderer.domElement );
+           
+            //figura
+              var n=0;
+              const geometry = new THREE.ConeGeometry( 1, 1, 10);
+              const material = new THREE.MeshNormalMaterial( {color: 0x808000 } );
+              const cone = new THREE.Mesh( geometry, material );
+              scene.add( cone );
+              cone.rotation.z=180
+              cone.rotation.y=180
+              cone.rotation.x=90
+       
+ 
+            //cuadricula
+              const size = 20;
+              const divisions =20 ;
+              const gridHelper = new THREE.GridHelper( size, divisions );
+              scene.add( gridHelper );
+                       
+            //  Se ajusta la camara
+              camera.position.z = -2;
+              camera.position.y = 0.3;
+              camera.position.x = 5;
+              camera.lookAt(scene.position);
+              camera.rotation.set(0,360,0);
+
+            //ejes X,Y,Z
+              const axesHelper = new THREE.AxesHelper(50);
+              const negativoaxesHelper = new THREE.AxesHelper(-50);
+              scene.add(axesHelper,negativoaxesHelper);
+
+              function pieza1(){
+                cube.position.y = 0.0;
+              }
+         
+              function animate() {
+                requestAnimationFrame( animate );
+                renderer.render( scene, camera );
+                }
+              animate();
+
+        </script>
+    </body>
+</html>
